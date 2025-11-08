@@ -7,11 +7,10 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
--- Turn off paste mode when leaving insert
-vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = "*",
-  command = "set nopaste",
-})
+-- [[ Custom Autocommand Group ]]
+-- Groups user-defined autocommands.
+-- Specify { clear = true } to clear old commands when reloading the configuration.
+local user_autocmd_group = vim.api.nvim_create_augroup("HisameUserAutocmds", { clear = true })
 
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd("FileType", {

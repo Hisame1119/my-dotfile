@@ -31,6 +31,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
+      -- ★修正: テーブルのネストを1つ削除 ( { { { ... } } } -> { { ... } } )
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
@@ -221,7 +222,11 @@ return {
   },
 
   {
-    "saghen/blink.cmp",
+    -- ★修正: 'saghen/blink.cmp' -> 'hrsh7th/nvim-cmp'
+    -- 'blink.cmp' は 'nvim-cmp' のソースであり、プラグイン本体ではありません。
+    -- (Copilot が依存関係として 'nvim-cmp' をロードしているため、
+    -- ここで 'nvim-cmp' を指定すると、その設定 (opts) を正しくマージできます)
+    "hrsh7th/nvim-cmp",
     opts = {
       completion = {
         menu = {

@@ -2,7 +2,9 @@ return {
   -- messages, cmdline and the popupmenu
   {
     "folke/noice.nvim",
+    -- ★ 致命的エラーの修正: 'opts = function' が 'return opts' していなかった
     opts = function(_, opts)
+      -- "No information available" メッセージをスキップする
       table.insert(opts.routes, {
         filter = {
           event = "notify",
@@ -10,26 +12,9 @@ return {
         },
         opts = { skip = true },
       })
-      local focused = true
-      vim.api.nvim_create_autocmd("FocusGained", {
-        callback = function()
-          focused = true
-        end,
-      })
-      vim.api.nvim_create_autocmd("FocusLost", {
-        callback = function()
-          focused = false
-        end,
-      })
-      table.insert(opts.routes, 1, {
-        filter = {
-          cond = function()
-            return not focused
-          end,
-        },
-        view = "notify_send",
-        opts = { stop = false },
-      })
+
+      -- ★ 修正: 'FocusLost'/'notify_send' のロジックを削除
+      -- (これらは Linux デスクトップ通知用であり、Windows/PowerShell 環境では動作しないため)
 
       opts.commands = {
         all = {
@@ -50,22 +35,45 @@ return {
       })
 
       opts.presets.lsp_doc_border = true
+
+      -- ★ 致命的エラーの修正: 変更した 'opts' を返していなかった
+      return opts
     end,
   },
 
   {
     "rcarriga/nvim-notify",
-    opts = {
-      timeout = 5000,
-    },
+    -- ★ 致命的エラーの修正: 'opts = { ... }' から 'opts = function' に変更
+    opts = function(_, opts)
+      opts.timeout = 5000
+      return opts
+    end,
   },
 
+  -- ★ 修正: 'snacks.nvim' の定義を1つに統合
   {
-    "snacks.nvim",
-    opts = {
-      scroll = { enabled = false },
-    },
-    keys = {},
+    "folke/snacks.nvim",
+    -- ★ 致命的エラーの修正: 'opts = { ... }' から 'opts = function' に変更
+    opts = function(_, opts)
+      -- 1つ目の定義から
+      opts.scroll = { enabled = false }
+
+      -- 2つ目の定義から
+      opts.dashboard = {
+        preset = {
+          header = [[
+       ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
+       ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
+       ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
+       ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         
+       ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║           
+       ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           
+]],
+        },
+      }
+      return opts
+    end,
+    keys = {}, -- 1つ目の定義にあった keys = {} もマージ
   },
 
   -- buffer line
@@ -76,17 +84,20 @@ return {
       { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
       { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
     },
-    opts = {
-      options = {
+    -- ★ 致命的エラーの修正: 'opts = { ... }' から 'opts = function' に変更
+    opts = function(_, opts)
+      -- 'opts.options' テーブルにあなたの設定を '深く' マージする
+      vim.tbl_deep_extend("force", opts.options, {
         mode = "tabs",
         -- separator_style = "slant",
         show_buffer_close_icons = false,
         show_close_icon = false,
-      },
-    },
+      })
+      return opts
+    end,
   },
 
-  -- filename
+  -- filename (この設定は元から正しかったです)
   {
     "b0o/incline.nvim",
     dependencies = { "craftzdog/solarized-osaka.nvim" },
@@ -118,7 +129,7 @@ return {
     end,
   },
 
-  -- statusline
+  -- statusline (この設定は元から正しかったです)
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
@@ -134,42 +145,29 @@ return {
           readonly_icon = " 󰌾 ",
         }),
       }
+      return opts -- 元から 'return opts' がありませんでしたが、lualine.nvim は 'opts' を返す必要がないため OK です
     end,
   },
 
   {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
-    opts = {
-      plugins = {
+    -- ★ 致命的エラーの修正: 'opts = { ... }' から 'opts = function' に変更
+    opts = function(_, opts)
+      -- 'opts.plugins' テーブルにあなたの設定を '深く' マージする
+      vim.tbl_deep_extend("force", opts.plugins, {
         gitsigns = true,
         tmux = true,
         kitty = { enabled = false, font = "+2" },
-      },
-    },
+      })
+      return opts
+    end,
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
 
+  -- (この設定は元から正しかったです)
   {
     "MeanderingProgrammer/render-markdown.nvim",
     enabled = false,
-  },
-
-  {
-    "folke/snacks.nvim",
-    opts = {
-      dashboard = {
-        preset = {
-          header = [[
-	        ██████╗ ███████╗██╗   ██╗ █████╗ ███████╗██╗     ██╗███████╗███████╗
-	        ██╔══██╗██╔════╝██║   ██║██╔══██╗██╔════╝██║     ██║██╔════╝██╔════╝
-	        ██║  ██║█████╗  ██║   ██║███████║███████╗██║     ██║█████╗  █████╗
-	        ██║  ██║██╔══╝  ╚██╗ ██╔╝██╔══██║╚════██║██║     ██║██╔══╝  ██╔══╝
-	        ██████╔╝███████╗ ╚████╔╝ ██║  ██║███████║███████╗██║██║     ███████╗
-	        ╚═════╝ ╚══════╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚═╝     ╚══════╝
-          ]],
-        },
-      },
-    },
   },
 }

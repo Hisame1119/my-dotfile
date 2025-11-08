@@ -5,6 +5,8 @@
 #    (例: .cache, .local, .ssh など)
 /.*
 
+/.config/nvim/.git
+
 # 3. 例外として、.config フォルダを追跡対象にする
 !/.config
 
