@@ -1,14 +1,25 @@
-# 1. ルート階層にある . (ドット) 始まりではないフォルダやファイルをすべて無視
-/*
+# --- Security & Credentials (機密情報・認証情報) ---
+# .configフォルダ内のgit設定を除外
+.config/git/config
 
-# 2. ルート階層にある . (ドット) 始まりのフォルダやファイルをすべて無視
-#    (例: .cache, .local, .ssh など)
-/.*
+# .configフォルダ内のScoop設定を除外
+.config/scoop/config.json
 
-/.config/nvim/.git
+# --- Backups & Temporary Files (バックアップ・一時ファイル) ---
+# これらは階層に関係なく無視するため、パス指定なし（ワイルドカード）にします
+*.bak
+*.backup
+*~
+*.old
 
-# 3. 例外として、.config フォルダを追跡対象にする
-!/.config
+# ディレクトリごとバックアップされているものは、.config以下のパスを指定して除外
+.config/nvim.bak/
 
-# 4. 例外として、.gitignore ファイル自身も追跡対象にする
-!/.gitignore
+# --- Logs (ログファイル) ---
+# ログは階層に関係なく無視
+*.log
+*.log.*
+
+# --- Cache & System State (キャッシュ・システム状態) ---
+# .config内のCopilotキャッシュを除外
+.config/github-copilot/

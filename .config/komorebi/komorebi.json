@@ -1,0 +1,157 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.38/schema.json",
+  "app_specific_configuration_path": "$Env:KOMOREBI_CONFIG_HOME/applications.json",
+  "window_hiding_behaviour": "Cloak",
+  "cross_monitor_move_behaviour": "Insert",
+  "default_workspace_padding": 3,
+  "default_container_padding": 3,
+  "border": true,
+  "border_width": 4,
+  "border_offset": -1,
+  "border_colours": {
+    "single": "#89b4fa",
+    "stack": "#00ff99",
+    "floating": "#00ff99",
+    "monocle": "#f38ba8",
+    "unfocused": "#303030"
+  },
+  "mouse_follows_focus": true,
+  "transparency": true,
+  "transparency_alpha": 240,
+  "animation": {
+    "enabled": true,
+    "duration": 400,
+    "fps": 120,
+    "style": {
+      "movement": "EaseOutBack",
+      "transparency": "Linear"
+    }
+  },
+  "theme": {
+    "palette": "Base16",
+    "name": "Ashes",
+    "unfocused_border": "Base03",
+    "bar_accent": "Base0D"
+  },
+  "monitors": [
+    {
+      "workspaces": [
+        {
+          "name": "I",
+          "layout": "BSP"
+        },
+        {
+          "name": "II",
+          "layout": "BSP"
+        },
+        {
+          "name": "III",
+          "layout": "BSP"
+        }
+      ]
+    },
+    {
+      "workspaces": [
+        {
+          "name": "1",
+          "layout": "BSP"
+        },
+        {
+          "name": "2",
+          "layout": "BSP"
+        },
+        {
+          "name": "3",
+          "layout": "BSP"
+        }
+      ]
+    }
+  ],
+  "ignore_rules": [
+    {
+      "kind": "Title",
+      "id": "LINE",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Steam",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Auto Dark Mode",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "WinDynamicDesktop",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Configure Schedule",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Intelligent standby list cleaner",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "Spotify.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "crosvm.exe",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Google Play Game",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "TVerRec",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Setting",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Riot Client",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Valorant Tracker",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "HoYoPlay",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "GoogleDriveFS.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Phone Link",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Autodesk Access",
+      "matching_strategy": "Equals"
+    }
+  ]
+}

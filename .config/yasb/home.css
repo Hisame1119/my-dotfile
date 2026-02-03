@@ -1,0 +1,74 @@
+/* --- ベース & ライトモード --- */
+.home-widget {
+  padding: 0 4px 0 12px;
+}
+
+.home-widget .icon {
+  /* #000 ではなく、ライトモード用の変数を使用 */
+  color: var(--text1-light);
+}
+
+.home-widget .icon:hover {
+  color: var(--text1-light);
+}
+
+.home-menu {
+  background-color: var(--bg-color1-light);
+  border-radius: 8px;
+  border: 1px solid var(--bg-color2-light);
+}
+
+.home-menu .menu-item {
+  /* 共通のスタイル */
+  padding: 8px 48px 9px 16px;
+  font-size: 12px;
+  font-family: 'Segoe UI';
+  font-weight: 600;
+
+  /* ライトモードの色 */
+  color: var(--text1-light);
+}
+
+.home-menu .menu-item:hover {
+  background-color: var(--bg-color2-light);
+  color: #fff;
+}
+
+.home-menu .separator {
+  max-height: 1px;
+  background-color: var(--bg-color2-light);
+}
+
+/* --- DARK MODE (上書き) --- */
+/*
+  .dark が親要素 (html や body) に付いていることを前提としています。
+  子要素の .dark は削除しました。
+*/
+
+.dark .home-widget .icon {
+  color: var(--lavender);
+}
+
+.dark .home-widget .icon:hover {
+  color: var(--text1-dark);
+}
+
+.dark .home-menu {
+  background-color: var(--bg-color1-dark);
+  border: 1px solid var(--bg-color2-dark);
+}
+
+.dark .home-menu .menu-item {
+  /* 色だけを上書き */
+  color: var(--text1-dark);
+}
+
+.dark .home-menu .menu-item:hover {
+  background-color: var(--bg-color2-dark);
+  color: #fff;
+  /* 元の指定（白）を維持 */
+}
+
+.dark .home-menu .separator {
+  background-color: var(--bg-color2-dark);
+}

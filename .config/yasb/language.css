@@ -1,0 +1,112 @@
+.language-menu {
+  background-color: var(--bg-color1-light);
+  min-width: 300px;
+}
+
+.language-menu .header {
+  font-family: 'Segoe UI';
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  padding: 12px;
+  background-color: var(--bg-color1-light);
+  border-bottom: 1px solid var(--bg-color1-ligth);
+}
+
+.language-menu .footer {
+  font-family: 'Segoe UI';
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px;
+  margin-top: 2px;
+  color:  var(--text2-light);
+  background-color: var(--bg-color1-light);
+  border-top: 1px solid var(--bg-color2-light);
+}
+
+.language-menu .footer:hover {
+  background-color: var(--bg-color2-light);
+  color: var(--text1-light);
+}
+
+.language-menu .language-item {
+  padding: 6px 12px;
+  margin: 2px 4px;
+}
+
+.language-menu .language-item.active {
+  background-color: var(--bg-color2-light);
+  border-radius: 4px;
+}
+
+.language-menu .language-item:hover {
+  background-color: var(--bg-color2-light);
+}
+
+.language-menu .language-item.active:hover {
+  background-color: var(--bg-color2-light);
+  border-radius: 4px;
+}
+
+.language-menu .language-item .code {
+  font-weight: 900;
+  font-size: 14px;
+  min-width: 40px;
+  text-transform: uppercase;
+}
+
+.language-menu .language-item .icon {
+  font-size: 16px;
+  margin-right: 8px;
+  color: var(--text1-light)
+}
+
+.language-menu .language-item .name {
+  font-weight: 600;
+  font-family: 'Segoe UI';
+  font-size: 14px;
+}
+
+.language-menu .language-item .layout {
+  font-weight: 600;
+  font-family: 'Segoe UI';
+  font-size: 12px;
+}
+
+/* DARK MODE */
+
+.dark .language-menu {
+  background-color: var(--bg-color1-dark);
+}
+
+.dark .language-menu .header {
+  background-color: var(--bg-color1-dark);
+  border-bottom: 1px solid var(--bg-color1-dark);
+}
+
+.dark .language-menu .footer {
+  color:  var(--text2-dark);
+  background-color: var(--bg-color1-dark);
+  border-top: 1px solid var(--bg-color2-dark);
+}
+
+.dark .language-menu .footer:hover {
+  background-color: var(--bg-color2-dark);
+  color: var(--text1-dark);
+}
+
+.dark .language-menu .language-item.active {
+  background-color: var(--bg-color2-dark);
+}
+
+.dark .language-menu .language-item:hover {
+  background-color: var(--bg-color2-dark);
+}
+
+.dark .language-menu .language-item.active:hover {
+  background-color: var(--bg-color2-dark);
+}
+
+.dark .language-menu .language-item .icon {
+  color: var(--text1-dark)
+}
