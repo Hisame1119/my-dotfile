@@ -1,7 +1,17 @@
-/*
-This is default and very simple styles file for Yasb.
-For more information about configuration options, please visit the Wiki https://github.com/amnweb/yasb/wiki
-*/
+/* ===================================================================
+   YASB Global Styles
+   Yet Another Status Bar - Main Stylesheet
+
+   このファイルには、全体に適用されるグローバルスタイルのみを含めます。
+   ウィジェット固有のスタイルは各ウィジェットのCSSファイルに分離されています。
+
+   For more information: https://github.com/amnweb/yasb/wiki
+   =================================================================== */
+
+/* ===================================================================
+   Import Widget Stylesheets
+   =================================================================== */
+
 @import url("launchpad.css");
 @import url("language.css");
 @import url("disk.css");
@@ -11,352 +21,242 @@ For more information about configuration options, please visit the Wiki https://
 @import url("weather.css");
 @import url("whkd.css");
 @import url("home.css");
+@import url("komorebi-workspaces.css");
+@import url("power-menu.css");
+@import url("microphone.css");
+@import url("notifications.css");
+@import url("cava.css");
+
+/* ===================================================================
+   CSS Variables - Color Palette and Theme
+   =================================================================== */
 
 :root {
-  /* --- アクセント色 (共通) --- */
-  --mauve: #cba6f7;
-  --red: #f38ba8;
-  --yellow: #ffd16d;
-  --blue: #448fff;
-  --lavender: #b4befe;
+    /* --- アクセント色 (共通) --- */
+    --mauve: #cba6f7;
+    --red: #f38ba8;
+    --yellow: #ffd16d;
+    --blue: #448fff;
+    --lavender: #b4befe;
 
-  /* --- ライトモード用の変数セット --- */
-  --text1-light: #151517;
-  --text2-light: #64666e;
-  --text3-light: #454854;
-  --text4-light: #5f6274;
-  --bg-color1-light: rgba(235, 235, 235, 0.85);
-  --bg-color2-light: rgba(190, 190, 190, 0.85);
+    /* --- ライトモード用の変数セット --- */
+    --text1-light: #151517;
+    --text2-light: #64666e;
+    --text3-light: #454854;
+    --text4-light: #5f6274;
+    --bg-color1-light: rgba(235, 235, 235, 0.85);
+    --bg-color2-light: rgba(190, 190, 190, 0.85);
 
-  /* --- ダークモード用の変数セット --- */
-  --text1-dark: #d4d9eb;
-  --text2-dark: #8f929e;
-  --text3-dark: #9399b2;
-  --text4-dark: #7f849c;
-  --bg-color1-dark: rgba(25, 25, 25, 0.85);
-  --bg-color2-dark: rgba(51, 51, 51, 0.85);
+    /* --- ダークモード用の変数セット --- */
+    --text1-dark: #d4d9eb;
+    --text2-dark: #8f929e;
+    --text3-dark: #9399b2;
+    --text4-dark: #7f849c;
+    --bg-color1-dark: rgba(25, 25, 25, 0.85);
+    --bg-color2-dark: rgba(51, 51, 51, 0.85);
+
+    /* --- ポップアップ用の変数 --- */
+    --popup-bg-light: rgba(245, 245, 245, 0.95);
+    --popup-bg-dark: rgba(20, 20, 20, 0.95);
+    --popup-border-light: rgba(200, 200, 200, 0.6);
+    --popup-border-dark: rgba(80, 80, 80, 0.6);
+
+    /* --- ボーダー用の変数 --- */
+    --border-light: rgba(190, 190, 190, 0.5);
+    --border-dark: rgba(80, 80, 80, 0.5);
+
+    /* --- ホバー用の変数 --- */
+    --hover-bg-light: rgba(200, 200, 200, 0.5);
+    --hover-bg-dark: rgba(60, 60, 60, 0.5);
+
+    /* --- アクティブ状態用 --- */
+    --active-bg-light: rgba(180, 180, 180, 0.7);
+    --active-bg-dark: rgba(70, 70, 70, 0.7);
+
+    /* --- 入力フィールド用 --- */
+    --input-bg-light: rgba(255, 255, 255, 0.9);
+    --input-bg-dark: rgba(30, 30, 30, 0.9);
+    --input-border-light: rgba(180, 180, 180, 0.6);
+    --input-border-dark: rgba(100, 100, 100, 0.6);
+    --input-focus-border: #0078D4;
+
+    /* --- ボタン用の変数 --- */
+    --button-bg-light: rgba(220, 220, 220, 0.7);
+    --button-bg-dark: rgba(50, 50, 50, 0.7);
+    --button-hover-light: rgba(200, 200, 200, 0.9);
+    --button-hover-dark: rgba(70, 70, 70, 0.9);
 }
 
-/* --- Base Styles (Light Mode Default) --- */
+/* ===================================================================
+   Global Base Styles (Light Mode Default)
+   =================================================================== */
 
 * {
-  font-size: 12px;
-  color: var(--text1-light);
-  font-weight: 600;
-  font-family: "JetBrainsMono NFP";
+    font-size: 12px;
+    color: var(--text1-light);
+    font-weight: 600;
+    font-family: "JetBrainsMono NFP";
 }
 
 .yasb-bar {
-  background-color: var(--bg-color1-light);
-  border-radius: 8px;
-  border: 1px solid var(--bg-color2-light);
+    background-color: var(--bg-color1-light);
+    border-radius: 8px;
+    border: 1px solid var(--bg-color2-light);
 }
 
-/* Global styles for ToolTip */
+/* ===================================================================
+   Global Tooltip Styles
+   =================================================================== */
+
 .tooltip {
-  background-color: var(--bg-color1-light);
-  border-radius: 4px;
-  color: var(--text1-light);
-  padding: 5px 10px;
-  font-size: 12px;
-  font-family: 'Segoe UI';
-  font-weight: 600;
-  margin-top: 4px;
+    background-color: var(--bg-color1-light);
+    border-radius: 4px;
+    color: var(--text1-light);
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: "Segoe UI";
+    font-weight: 600;
+    margin-top: 4px;
 }
 
-/* Global context menu style */
+/* ===================================================================
+   Global Context Menu Styles
+   =================================================================== */
+
 .context-menu,
 .context-menu .menu-checkbox {
-  background-color: var(--bg-color1-light);
-  border: none;
-  padding: 4px 0px;
-  font-family: 'Segoe UI';
-  font-size: 12px;
-  color: var(--text1-light)
+    background-color: var(--bg-color1-light);
+    border: none;
+    padding: 4px 0px;
+    font-family: "Segoe UI";
+    font-size: 12px;
+    color: var(--text1-light);
 }
 
 .context-menu::right-arrow {
-  width: 8px;
-  height: 8px;
-  padding-right: 24px;
+    width: 8px;
+    height: 8px;
+    padding-right: 24px;
 }
 
 .context-menu::item,
 .context-menu .menu-checkbox {
-  background-color: transparent;
-  padding: 6px 12px;
-  margin: 2px 6px;
-  border-radius: 6px;
-  min-width: 100px;
+    background-color: transparent;
+    padding: 6px 12px;
+    margin: 2px 6px;
+    border-radius: 6px;
+    min-width: 100px;
 }
 
 .context-menu::item:selected,
 .context-menu .menu-checkbox:hover {
-  background-color: var(--bg-color2-light);
-  color: #FFFFFF;
+    background-color: var(--bg-color2-light);
+    color: #ffffff;
 }
 
 .context-menu::separator {
-  height: 1px;
-  background-color: #404040;
-  margin: 4px 8px;
+    height: 1px;
+    background-color: #404040;
+    margin: 4px 8px;
 }
 
 .context-menu::item:disabled {
-  color: #666666;
-  background-color: transparent;
+    color: #666666;
+    background-color: transparent;
 }
 
 .context-menu .menu-checkbox .checkbox {
-  border: none;
-  padding: 8px 16px;
-  font-size: 12px;
-  margin: 0;
-  color: var(--text1-light);
-  font-family: 'Segoe UI'
+    border: none;
+    padding: 8px 16px;
+    font-size: 12px;
+    margin: 0;
+    color: var(--text1-light);
+    font-family: "Segoe UI";
 }
 
 .context-menu .submenu::item:disabled {
-  margin: 0;
-  padding-left: 16px;
+    margin: 0;
+    padding-left: 16px;
 }
 
 .context-menu .menu-checkbox .checkbox:unchecked {
-  color: var(--text2-light)
+    color: var(--text2-light);
 }
 
 .context-menu .menu-checkbox .checkbox::indicator {
-  width: 12px;
-  height: 12px;
-  margin-left: 0px;
-  margin-right: 8px;
+    width: 12px;
+    height: 12px;
+    margin-left: 0px;
+    margin-right: 8px;
 }
 
 .context-menu .menu-checkbox .checkbox::indicator:unchecked {
-  background: #444444;
-  border-radius: 2px;
+    background: #444444;
+    border-radius: 2px;
 }
 
 .context-menu .menu-checkbox .checkbox::indicator:checked {
-  background: var(--blue);
-  border-radius: 2px;
+    background: var(--blue);
+    border-radius: 2px;
 }
 
 .context-menu .menu-checkbox .checkbox:focus {
-  outline: none;
+    outline: none;
 }
+
+/* ===================================================================
+   Common Widget Styles
+   =================================================================== */
 
 .widget {
-  padding: 0 12px;
-  margin: 0;
-}
-
-.icon {
-  font-size: 16px;
-}
-
-.widget .label {
-  padding: 0px 2px;
-}
-
-.komorebi-active-layout {
-  padding: 0
-}
-
-.komorebi-workspaces .offline-status {
-  color: var(--text4-light);
-  font-size: 12px;
-  padding: 0 0 0 4px;
-  font-weight: 600;
-}
-
-.komorebi-workspaces .ws-btn {
-  border: none;
-  background-color: var(--text4-light);
-  margin: 0 3px;
-  height: 9px;
-  width: 9px;
-  border-radius: 4px;
-}
-
-.komorebi-workspaces .ws-btn:hover {
-  color: var(--text2-light);
-}
-
-.komorebi-workspaces .ws-btn.populated {
-  background-color: var(--lavender);
-}
-
-.komorebi-workspaces .ws-btn.active {
-  background-color: var(--blue);
-  width: 36px;
-}
-
-.power-menu-widget .label {
-  color: #f38ba8;
-  font-size: 13px;
-}
-
-.power-menu-popup {
-  background-color: transparent
-}
-
-.power-menu-popup .button {
-  padding: 0;
-  width: 180px;
-  height: 230px;
-  border-radius: 8px;
-  background-color: var(--bg-color1-light);
-  border: 4px solid transparent;
-  margin: 0px;
-}
-
-.power-menu-popup .button.hover {
-  background-color: var(--bg-color1-light);
-  border: 4px solid var(--bg-color1-light);
-}
-
-.power-menu-popup .button .label {
-  margin-bottom: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text3-light)
-}
-
-.power-menu-popup .button .icon {
-  font-size: 64px;
-  padding-top: 32px;
-  color: var(--text4-light)
-}
-
-.power-menu-popup .button.hover .label,
-.power-menu-popup .button.hover .icon {
-  color: rgba(255, 255, 255, 0.808)
-}
-
-.power-menu-popup .button.cancel .icon {
-  padding: 0;
-  margin: 0;
-}
-
-.power-menu-popup .button.cancel .label {
-  color: var(--red);
-  margin: 0;
-}
-
-.power-menu-popup .button.cancel {
-  height: 32px;
-  border-radius: 4px;
-}
-
-.power-menu-popup .button.cancel.hover .label {
-  color: rgb(255, 255, 255)
-}
-
-.uptime {
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: var(--text4-light);
-  font-weight: 600;
-}
-
-.microphone-widget {
-  padding: 0 6px 0 6px;
-}
-
-.microphone-widget .icon {
-  font-size: 18px;
-  color: var(--mauve);
-}
-
-.notification-widget {
-  padding: 0 0px 0 4px;
-}
-
-.notification-widget .icon {
-  font-size: 14px;
-}
-
-.notification-widget .icon.new-notification {
-  color: var(--blue);
-}
-
-.cava-widget {
-    padding: 0;
+    padding: 0 12px;
     margin: 0;
 }
 
+.icon {
+    font-size: 16px;
+}
 
-/* --- DARK MODE OVERRIDES --- */
+.widget .label {
+    padding: 0px 2px;
+}
+
+/* ===================================================================
+   DARK MODE OVERRIDES
+   =================================================================== */
 
 .dark * {
-  color: var(--text1-dark);
+    color: var(--text1-dark);
 }
 
 .dark.yasb-bar {
-  background-color: var(--bg-color1-dark);
-  border-color: var(--bg-color2-dark);
+    background-color: var(--bg-color1-dark);
+    border-color: var(--bg-color2-dark);
 }
 
 /* ToolTip */
 .dark .tooltip {
-  background-color: var(--bg-color1-dark);
-  color: var(--text1-dark);
+    background-color: var(--bg-color1-dark);
+    color: var(--text1-dark);
 }
 
 /* Context Menu */
 .dark .context-menu,
 .dark .context-menu .menu-checkbox {
-  background-color: var(--bg-color1-dark);
-  color: var(--text1-dark);
+    background-color: var(--bg-color1-dark);
+    color: var(--text1-dark);
 }
 
 .dark .context-menu::item:selected,
 .dark .context-menu .menu-checkbox:hover {
-  background-color: var(--bg-color2-dark);
-  color: #FFFFFF;
+    background-color: var(--bg-color2-dark);
+    color: #ffffff;
 }
 
 .dark .context-menu .menu-checkbox .checkbox {
-  color: var(--text1-dark);
+    color: var(--text1-dark);
 }
 
 .dark .context-menu .menu-checkbox .checkbox:unchecked {
-  color: var(--text2-dark);
-}
-
-/* Komorebi Workspaces */
-.dark .komorebi-workspaces .offline-status {
-  color: var(--text4-dark);
-}
-
-.dark .komorebi-workspaces .ws-btn {
-  background-color: var(--text4-dark);
-}
-
-.dark .komorebi-workspaces .ws-btn:hover {
-  color: var(--text2-dark);
-}
-
-/* Power Menu */
-.dark .power-menu-popup .button {
-  background-color: var(--bg-color1-dark);
-}
-
-.dark .power-menu-popup .button.hover {
-  background-color: var(--bg-color1-dark);
-  border-color: var(--bg-color1-dark);
-}
-
-.dark .power-menu-popup .button .label {
-  color: var(--text3-dark);
-}
-
-.dark .power-menu-popup .button .icon {
-  color: var(--text4-dark);
-}
-
-/* Uptime */
-.dark .uptime {
-  color: var(--text4-dark);
+    color: var(--text2-dark);
 }

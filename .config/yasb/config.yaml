@@ -1,24 +1,55 @@
-# This is default and very simple configuration file for Yasb.
-# For more information about configuration options, please visit the Wiki https://github.com/amnweb/yasb/wiki
-watch_stylesheet: true
-watch_config: true
-debug: false
-update_check: true # Enable automatic update check.
+# ===================================================================
+# YASB Configuration File
+# Yet Another Status Bar - Main Configuration
+#
+# このファイルは、YASBの動作とウィジェットの設定を定義します。
+# 各セクションは論理的にグループ化され、コメントで説明されています。
+#
+# For more information: https://github.com/amnweb/yasb/wiki
+# ===================================================================
+
+# ===================================================================
+# GLOBAL SETTINGS - グローバル設定
+# ===================================================================
+
+# 自動リロード設定
+watch_stylesheet: true  # CSSファイルの変更を監視して自動リロード
+watch_config: true      # config.yamlの変更を監視して自動リロード
+
+# デバッグとアップデート
+debug: false            # デバッグモード（トラブルシューティング時にtrueに）
+update_check: true      # 起動時に自動的にアップデートをチェック
+
+# ===================================================================
+# KOMOREBI SETTINGS - ウィンドウマネージャー設定
+# ===================================================================
+
 komorebi:
   start_command: "komorebic start --whkd"
   stop_command: "komorebic stop --whkd"
   reload_command: "komorebic stop --whkd && komorebic start --whkd"
+
+# ===================================================================
+# BAR CONFIGURATION - ステータスバー設定
+# ===================================================================
+
 bars:
   primary-bar:
     enabled: true
-    screens: ["*"]
+    screens: ["*"]  # すべての未割り当て画面に表示（"**" = すべての画面）
     class_name: "yasb-bar"
+
+    # バーの配置
     alignment:
-      position: "top"
-      center: false
+      position: "top"   # トップバー（"bottom" も可能）
+      center: false     # 中央揃えしない
+
+    # アニメーション設定
     animation:
       enabled: true
-      duration: 400
+      duration: 400     # ミリ秒
+
+    # ブラー効果（Windows 11 のみ）
     blur_effect:
       enabled: false
       acrylic: false
@@ -26,27 +57,33 @@ bars:
       round_corners: false
       round_corners_type: "normal"
       border_color: "system"
+
+    # ウィンドウフラグ
     window_flags:
       always_on_top: false
-      windows_app_bar: true
+      windows_app_bar: true  # Windowsアプリバーとして登録
+
+    # サイズ設定
     dimensions:
       width: "100%"
       height: 32
+
+    # パディング
     padding:
       top: 4
       left: 4
       bottom: 0
       right: 4
+
+    # ウィジェット配置
     widgets:
       left:
         - "home"
-        #- "launchpad"
         - "whkd"
         - "komorebi_workspaces"
         - "komorebi_active_layout"
         - "active_window"
       center:
-        #- "cpu"
         - "weather"
         - "clock"
         - "apps"
@@ -60,7 +97,17 @@ bars:
         - "volume"
         - "notifications"
         - "power_menu"
+
+# ===================================================================
+# WIDGET DEFINITIONS - ウィジェット定義
+# ===================================================================
+
 widgets:
+  # =================================================================
+  # SYSTEM WIDGETS - システムウィジェット
+  # =================================================================
+
+  # --- Home Widget: クイックアクセスメニュー ---
   home:
     type: "yasb.home.HomeWidget"
     options:
@@ -73,6 +120,8 @@ widgets:
       system_menu: true
       power_menu: true
       blur: false
+
+  # --- Launchpad Widget: アプリケーションランチャー（コメントアウト済み） ---
   launchpad:
     type: "yasb.launchpad.LaunchpadWidget"
     options:
@@ -92,109 +141,74 @@ widgets:
         fade_out_duration: 200
       callbacks:
         on_left: "toggle_launchpad"
-      app_title_shadow:
-        enabled: true
-        color: "#00000090"
-        offset: [1, 1]
-        radius: 2
-      app_icon_shadow:
-        enabled: true
-        color: "#00000090"
-        offset: [0, 2]
-        radius: 8
+
+  # =================================================================
+  # WINDOW MANAGER WIDGETS - ウィンドウマネージャーウィジェット
+  # =================================================================
+
+  # --- WHKD Widget: キーバインディング表示 ---
   whkd:
     type: "yasb.whkd.WhkdWidget"
     options:
       label: "<span>\uf11c</span>"
       special_keys:
-        - key: "win"
-          key_replace: "\ue70f"
-        - key: "ctrl"
-          key_replace: "Ctrl"
-        - key: "alt"
-          key_replace: "Alt"
-        - key: "shift"
-          key_replace: "Shift"
-        - key: "left"
-          key_replace: "\u2190"
-        - key: "right"
-          key_replace: "\u2192"
-        - key: "up"
-          key_replace: "\u2191"
-        - key: "down"
-          key_replace: "\u2193"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  media:
-    type: "yasb.media.MediaWidget"
+        - { key: "win", key_replace: "\ue70f" }
+        - { key: "ctrl", key_replace: "Ctrl" }
+        - { key: "alt", key_replace: "Alt" }
+        - { key: "shift", key_replace: "Shift" }
+        - { key: "left", key_replace: "\u2190" }
+        - { key: "right", key_replace: "\u2192" }
+        - { key: "up", key_replace: "\u2191" }
+        - { key: "down", key_replace: "\u2193" }
+
+  # --- Komorebi Workspaces: ワークスペース表示 ---
+  komorebi_workspaces:
+    type: "komorebi.workspaces.WorkspaceWidget"
     options:
-      label: "{title}{s}{artist}"
-      label_alt: "{title}"
-      separator: " - "
-      hide_empty: true
+      label_offline: "\u23fc Offline"
+      label_workspace_btn: "\u000d"
+      label_workspace_active_btn: "\u000d"
+      label_workspace_populated_btn: "\u000d"
+      label_default_name: "{index}"
+      label_zero_index: false
+      hide_empty_workspaces: false
+      hide_if_offline: true
+      animation: true
+
+  # --- Komorebi Active Layout: レイアウト表示 ---
+  komorebi_active_layout:
+    type: "komorebi.active_layout.ActiveLayoutWidget"
+    options:
+      hide_if_offline: true
+      label: "{icon}"
+      layouts:
+        - "bsp"
+        - "columns"
+        - "rows"
+        - "grid"
+        - "vertical_stack"
+        - "horizontal_stack"
+        - "ultrawide_vertical_stack"
+        - "right_main_vertical_stack"
+      layout_icons:
+        bsp: "BSP"
+        columns: "COLS"
+        rows: "ROWS"
+        grid: "GRID"
+        vertical_stack: "V-STACK"
+        horizontal_stack: "H-STACK"
+        ultrawide_vertical_stack: "W-STACK"
+        right_main_vertical_stack: "RMV-STACK"
+        monocle: "MONOCLE"
+        maximized: "MAX"
+        floating: "FLOATING"
+        paused: "PAUSED"
       callbacks:
-        on_left: "toggle_media_menu"
-        on_middle: "do_nothing"
-        on_right: "do_nothing"
-      max_field_size:
-        label: 20
-        label_alt: 30
-      show_thumbnail: true
-      controls_only: false
-      controls_left: true
-      controls_hide: false
-      thumbnail_alpha: 80
-      thumbnail_padding: 8
-      thumbnail_corner_radius: 16
-      icons:
-        prev_track: "\ue892"
-        next_track: "\ue893"
-        play: "\ue768"
-        pause: "\ue769"
-    media_menu:
-      blur: false # Whether to apply a blur effect to the popup background.
-      round_corners: true # Whether to round the corners of the popup.
-      round_corners_type: "normal" # The type of corner rounding. Can be "normal" or "symmetric".
-      border_color: "system" # The border color of the popup. Can be a HEX, None or "system".
-      alignment: "right" # The alignment of the popup relative to the widget. Can be "left", "center", or "right".
-      direction: "down" # The direction in which the popup opens. Can be "up" or "down".
-      offset_top: 6 # The vertical offset of the popup from the widget.
-      offset_left: 0 # The horizontal offset of the popup from the widget.
-      thumbnail_corner_radius: 8 # The corner radius for the thumbnail in the popup.
-      thumbnail_size: 120 # The size of the thumbnail in the popup.
-      max_title_size: 60 # The maximum size for the title in the popup.
-      max_artist_size: 20 # The maximum size for the artist name in the popup.
-      show_source: true # Whether to show the media source (e.g., Spotify, YouTube) in the popup.
-      show_volume_slider: false # Whether to show the volume slider in the popup. Volume control per application.
-    media_menu_icons:
-      play: "\ue768" # Icon for the play button in the popup.
-      pause: "\ue769" # Icon for the pause button in the popup.
-      prev_track: "\ue892" # Icon for the previous track button in the popup.
-      next_track: "\ue893" # Icon for the next track button in the popup.
-      mute: "\ue994" # Icon for the mute button in the popup.
-      unmute: "\ue74f" # Icon for the unmute button in the popup.
-    scrolling_label:
-      enabled: false # Whether to enable the scrolling label.
-      update_interval_ms: 33 # The update interval for the scrolling label in milliseconds.
-      style: "left" # The style of the scrolling label. Can be "left", "right", "bounce", or "bounce-ease".
-      separator: " | " # The separator between repeating text in "left" or "right" scrolling style.
-      label_padding: 1 # The padding around the label in "bounce" and "bounce-ease" style. By default it's one character on each side.
-      ease_slope: 20 # The easing slope for the bounce effect. Easing curve params: https://www.desmos.com/calculator/j7eamemxzi
-      ease_pos: 0.8 # The easing curve position for the bounce effect.
-      ease_min: 0.5 # The minimum value for the bounce effect easing curve.
-    container_shadow:
-      enabled: false # Whether to enable the container shadow.
-      color: "black" # The color of the shadow. Can be a HEX value or color name.
-      radius: 3 # The blur radius of the shadow.
-      offset: [1, 1] # The offset of the shadow in the format [x, y].
-    label_shadow:
-      enabled: false # Whether to enable the label shadow.
-      color: "black" # The color of the shadow. Can be a HEX value or color name.
-      radius: 3 # The blur radius of the shadow.
-      offset: [1, 1] # The offset of the shadow in the format [x, y].
+        on_left: "next_layout"
+        on_middle: "toggle_monocle"
+        on_right: "prev_layout"
+
+  # --- Active Window: アクティブウィンドウタイトル表示 ---
   active_window:
     type: "yasb.active_window.ActiveWindowWidget"
     options:
@@ -206,6 +220,12 @@ widgets:
       max_length: 30
       max_length_ellipsis: "..."
       monitor_exclusive: true
+
+  # =================================================================
+  # INFORMATION WIDGETS - 情報表示ウィジェット
+  # =================================================================
+
+  # --- Clock Widget: 時計・カレンダー ---
   clock:
     type: "yasb.clock.ClockWidget"
     options:
@@ -242,84 +262,41 @@ widgets:
         offset_left: 0
         show_holidays: false
         show_week_numbers: true
-        country_code: "AR"
+        country_code: "JP"  # 日本の祝日を表示
         holiday_color: "#FF6464"
         extended: false
       callbacks:
         on_left: "toggle_calendar"
         on_middle: "next_timezone"
         on_right: "toggle_label"
+      keybindings:
+        - keys: "win+c"
+          action: "toggle_calendar"
       container_padding:
         top: 0
         left: 0
         bottom: 0
         right: 0
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  komorebi_workspaces:
-    type: "komorebi.workspaces.WorkspaceWidget"
-    options:
-      label_offline: "\u23fc Offline"
-      label_workspace_btn: "\u000d"
-      label_workspace_active_btn: "\u000d"
-      label_workspace_populated_btn: "\u000d"
-      label_default_name: "{index}"
-      label_zero_index: false
-      hide_empty_workspaces: false
-      hide_if_offline: true
-      animation: true
-  komorebi_active_layout:
-    type: "komorebi.active_layout.ActiveLayoutWidget"
-    options:
-      hide_if_offline: true
-      label: "{icon}"
-      layouts:
-        [
-          "bsp",
-          "columns",
-          "rows",
-          "grid",
-          "vertical_stack",
-          "horizontal_stack",
-          "ultrawide_vertical_stack",
-          "right_main_vertical_stack",
-        ]
-      layout_icons:
-        bsp: "BSP"
-        columns: "COLS"
-        rows: "ROWS"
-        grid: "GRID"
-        vertical_stack: "V-STACK"
-        horizontal_stack: "H-STACK"
-        ultrawide_vertical_stack: "W-STACK"
-        right_main_vertical_stack: "RMV-STACK"
-        monocle: "MONOCLE"
-        maximized: "MAX"
-        floating: "FLOATING"
-        paused: "PAUSED"
-      callbacks:
-        on_left: "next_layout"
-        on_middle: "toggle_monocle"
-        on_right: "prev_layout"
+
+  # --- Weather Widget: 天気予報 ---
   weather:
     type: "yasb.weather.WeatherWidget"
     options:
       label: "<span>{icon}</span> {temp}"
       label_alt: "{location}: Min {min_temp}, Max {max_temp}, Humidity {humidity}"
-      api_key: "3bf4cf9a7c3f40d6b31174128242807" # Get your free API key from https://www.weatherapi.com/
+      api_key: "$env:YASB_WEATHER_API_KEY"
       show_alerts: true
       tooltip: true
-      update_interval: 600 # Update interval in seconds, Min 600 seconds
+      update_interval: 600  # 10分ごとに更新（最小値: 600秒）
       hide_decimal: true
-      units: "metric" # Can be 'metric' or 'imperial'
-      location: "Kanagawa, Yokohama, 2240023" # You can use "USA Los Angeles 90006" {COUNTRY CITY ZIP_CODE}, or just city.
+      units: "metric"
+      location: "Kanagawa, Yokohama, 2240023"
       callbacks:
         on_left: "toggle_card"
-        on_middle: "do_nothing"
         on_right: "toggle_label"
+      keybindings:
+        - keys: "win+w"
+          action: "toggle_card"
       icons:
         sunnyDay: "\ue30d"
         clearNight: "\ue32b"
@@ -344,31 +321,155 @@ widgets:
         alignment: "right"
         direction: "down"
         icon_size: 64
-        show_hourly_forecast: true # Set to False to disable hourly forecast
-        time_format: "24h" # can be 12h or 24h
+        show_hourly_forecast: true
+        time_format: "24h"
         hourly_point_spacing: 76
-        hourly_icon_size: 32 # better to set 16, 32 or 64 for better quality
-        icon_smoothing: true # should be true for smoother icon or false for sharper icon if using 16, 32 or 64 for hourly_icon_size
-        temp_line_width: 2 # can be 0 to hide the temperature line
+        hourly_icon_size: 32
+        icon_smoothing: true
+        temp_line_width: 2
         current_line_color: "#8EAEE8"
-        current_line_width: 1 # can be 0 to hide the current hour line
+        current_line_width: 1
         current_line_style: "dot"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
+
+  # --- CPU Widget: CPU使用率（コメントアウト済み） ---
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      label: "<span>\uf4bc</span> {info[percent][total]}%"
+      update_interval: 2000
+      cpu_thresholds:
+        low: 25
+        medium: 50
+        high: 90
+
+  # --- Memory Widget: メモリ使用率 ---
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uefc5</span>{virtual_mem_percent}%"
+      update_interval: 5000
+      memory_thresholds:
+        low: 25
+        medium: 50
+        high: 90
+
+  # --- Disk Widget: ディスク使用率 ---
+  disk:
+    type: "yasb.disk.DiskWidget"
+    options:
+      label: "{volume_label} {space[used][percent]}"
+      label_alt: "{volume_label} {space[used][gb]} / {space[total][gb]}"
+      volume_label: "C"
+      update_interval: 60
+      group_label:
+        volume_labels: ["C", "E", "F", "G", "H"]
+        show_label_name: true
+        blur: true
+        round_corners: true
+        round_corners_type: "small"
+        border_color: "system"
+        alignment: "right"
+        direction: "down"
+      callbacks:
+        on_left: "toggle_group"
+        on_middle: "toggle_label"
+        on_right: "exec explorer C:\\"
+      disk_thresholds:
+        low: 25
+        medium: 50
+        high: 90
+
+  # =================================================================
+  # MEDIA WIDGETS - メディアウィジェット
+  # =================================================================
+
+  # --- Media Widget: メディア再生コントロール ---
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "{title}{s}{artist}"
+      label_alt: "{title}"
+      separator: " - "
+      hide_empty: true
+      callbacks:
+        on_left: "toggle_media_menu"
+      max_field_size:
+        label: 20
+        label_alt: 30
+      show_thumbnail: true
+      controls_only: false
+      controls_left: true
+      controls_hide: false
+      thumbnail_alpha: 80
+      thumbnail_padding: 8
+      thumbnail_corner_radius: 16
+      icons:
+        prev_track: "\ue892"
+        next_track: "\ue893"
+        play: "\ue768"
+        pause: "\ue769"
+    media_menu:
+      blur: false
+      round_corners: true
+      round_corners_type: "normal"
+      border_color: "system"
+      alignment: "right"
+      direction: "down"
+      offset_top: 6
+      offset_left: 0
+      thumbnail_corner_radius: 8
+      thumbnail_size: 120
+      max_title_size: 60
+      max_artist_size: 20
+      show_source: true
+      show_volume_slider: false
+    media_menu_icons:
+      play: "\ue768"
+      pause: "\ue769"
+      prev_track: "\ue892"
+      next_track: "\ue893"
+      mute: "\ue994"
+      unmute: "\ue74f"
+    scrolling_label:
+      enabled: false
+      update_interval_ms: 33
+      style: "left"
+      separator: " | "
+      label_padding: 1
+      ease_slope: 20
+      ease_pos: 0.8
+      ease_min: 0.5
+
+  # --- Cava Widget: オーディオビジュアライザー ---
+  cava:
+    type: "yasb.cava.CavaWidget"
+    options:
+      bar_height: 12
+      min_bar_height: 0
+      gradient: 1
+      foreground: "#89b4fa"
+      gradient_color_1: "#74c7ec"
+      gradient_color_2: "#89b4fa"
+      gradient_color_3: "#cba6f7"
+      bars_number: 8
+      bar_spacing: 2
+      bar_width: 4
+      bar_type: "bars"
+      framerate: 60
+      hide_empty: true
+
+  # --- Volume Widget: ボリュームコントロール ---
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
       label: "<span>{icon}</span> {level}"
       label_alt: "{volume}"
       volume_icons:
-        - "\ueee8" # Icon for muted
-        - "\uf026" # Icon for 0-10% volume
-        - "\uf027" # Icon for 11-30% volume
-        - "\uf027" # Icon for 31-60% volume
-        - "\uf028" # Icon for 61-100% volume
+        - "\ueee8"  # ミュート
+        - "\uf026"  # 0-10%
+        - "\uf027"  # 11-30%
+        - "\uf027"  # 31-60%
+        - "\uf028"  # 61-100%
       audio_menu:
         blur: true
         round_corners: true
@@ -379,11 +480,11 @@ widgets:
       callbacks:
         on_left: "toggle_volume_menu"
         on_right: "toggle_mute"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
+      keybindings:
+        - keys: "win+v"
+          action: "toggle_volume_menu"
+
+  # --- Microphone Widget: マイク状態表示 ---
   microphone:
     type: "yasb.microphone.MicrophoneWidget"
     options:
@@ -396,60 +497,12 @@ widgets:
         on_left: "toggle_mute"
         on_middle: "toggle_label"
         on_right: "exec cmd.exe /c start ms-settings:sound"
-  power_menu:
-    type: "yasb.power_menu.PowerMenuWidget"
-    options:
-      label: "\uf011"
-      uptime: True
-      blur: False
-      blur_background: True
-      animation_duration: 200
-      button_row: 5
-      buttons:
-        shutdown: ["\uf011", "Shut Down"]
-        restart: ["\uead2", "Restart"]
-        signout: ["\udb80\udf43", "Sign out"]
-        hibernate: ["\uf28e", "Hibernate"]
-        sleep: ["\u23fe", "Sleep"]
-        cancel: ["", "Cancel"]
-  apps:
-    type: "yasb.applications.ApplicationsWidget"
-    options:
-      label: "{data}"
-      app_list:
-        - {
-            icon: "\uf0a2",
-            launch: "notification_center",
-            name: "Notification Center",
-          } # launch notification center
-        - { icon: "\ueb51", launch: "quick_settings", name: "Settings" } # launch quick settings
-        - {
-            icon: "\uf422",
-            launch: "C:\Program Files\\WindowsApps\\Microsoft.CommandPalette_0.6.2963.0_x64__8wekyb3d8bbwe\\Microsoft.CmdPal.UI.exe",
-            name: "search",
-          } # launch search
-        - { icon: "\uf489", launch: "wt", name: "Windows Terminal" } # launch terminal
-        - {
-            icon: "\ue8da",
-            launch: "C:\\Users\\hisui\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
-            name: "Code",
-          } # open vscode
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  notifications:
-    type: "yasb.notifications.NotificationsWidget"
-    options:
-      label: "<span>\uf476</span> {count}"
-      label_alt: "{count} notifications"
-      hide_empty: false
-      tooltip: false
-      callbacks:
-        on_left: "toggle_notification"
-        on_right: "do_nothing"
-        on_middle: "toggle_label"
+
+  # =================================================================
+  # UTILITY WIDGETS - ユーティリティウィジェット
+  # =================================================================
+
+  # --- Language Widget: 入力言語表示 ---
   language:
     type: "yasb.language.LanguageWidget"
     options:
@@ -458,8 +511,10 @@ widgets:
       update_interval: 1
       callbacks:
         on_left: "toggle_menu"
-        on_middle: "do_nothing"
         on_right: "toggle_label"
+      keybindings:
+        - keys: "win+shift+l"
+          action: "toggle_menu"
       language_menu:
         blur: true
         round_corners: true
@@ -471,89 +526,49 @@ widgets:
         offset_left: 0
         show_layout_icon: true
         layout_icon: "\uf11c"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  cava:
-    type: "yasb.cava.CavaWidget"
+
+  # --- Notifications Widget: 通知表示 ---
+  notifications:
+    type: "yasb.notifications.NotificationsWidget"
     options:
-      bar_height: 12
-      min_bar_height: 0
-      gradient: 1
-      foreground: "#89b4fa"
-      gradient_color_1: '#74c7ec'
-      gradient_color_2: '#89b4fa'
-      gradient_color_3: '#cba6f7'
-      bars_number: 8
-      bar_spacing: 2
-      bar_width: 4
-      bar_type: "bars"
-      framerate: 60
-      hide_empty: true
-  disk:
-    type: "yasb.disk.DiskWidget"
-    options:
-      label: "{volume_label} {space[used][percent]}"
-      label_alt: "{volume_label} {space[used][gb]} / {space[total][gb]}"
-      volume_label: "C"
-      update_interval: 60
-      group_label:
-        volume_labels: ["C", "E", "F", "G", "H"]
-        show_label_name: true
-        blur: True
-        round_corners: True
-        round_corners_type: "small"
-        border_color: "System"
-        alignment: "right"
-        direction: "down"
+      label: "<span>\uf476</span> {count}"
+      label_alt: "{count} notifications"
+      hide_empty: false
+      tooltip: false
       callbacks:
-        on_left: "toggle_group"
+        on_left: "toggle_notification"
         on_middle: "toggle_label"
-        on_right: "exec explorer C:\\" # Open disk C in file explorer
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-      disk_thresholds:
-        low: 25
-        medium: 50
-        high: 90
-  cpu:
-    type: "yasb.cpu.CpuWidget"
+
+  # --- Power Menu Widget: 電源メニュー ---
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
     options:
-      label: "<span>\uf4bc</span> {info[percent][total]}%"
-      update_interval: 2000
-      cpu_thresholds:
-        low: 25
-        medium: 50
-        high: 90
-      callbacks:
-        on_left: "do_nothing"
-        on_middle: "do_nothing"
-        on_right: "do_nothing"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  memory:
-    type: "yasb.memory.MemoryWidget"
+      label: "\uf011"
+      uptime: true
+      show_user: true
+      blur: false
+      blur_background: true
+      animation_duration: 120
+      button_row: 3
+      buttons:
+        restart: ["\uead2", "Restart"]
+        shutdown: ["\uf011", "Shut Down"]
+        signout: ["\udb80\udf43", "Sign out"]
+        hibernate: ["\uf28e", "Hibernate"]
+        lock: ["\uea75", "Lock"]
+        cancel: ["\udb81\udf3a", "Cancel"]
+      keybindings:
+        - keys: "win+shift+p"
+          action: "toggle_power_menu"
+
+  # --- Applications Widget: クイック起動アプリ ---
+  apps:
+    type: "yasb.applications.ApplicationsWidget"
     options:
-      label: "<span>\uefc5</span>{virtual_mem_percent}%"
-      update_interval: 5000
-      callbacks:
-        on_left: "do_nothing"
-        on_middle: "do_nothing"
-        on_right: "do_nothing"
-      memory_thresholds:
-        low: 25
-        medium: 50
-        high: 90
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
+      label: "{data}"
+      app_list:
+        - { icon: "\uf0a2", launch: "notification_center", name: "Notification Center" }
+        - { icon: "\ueb51", launch: "quick_settings", name: "Settings" }
+        - { icon: "\uf422", launch: "C:\\Program Files\\WindowsApps\\Microsoft.CommandPalette_0.6.2963.0_x64__8wekyb3d8bbwe\\Microsoft.CmdPal.UI.exe", name: "Command Palette" }
+        - { icon: "\uf489", launch: "wt", name: "Windows Terminal" }
+        - { icon: "\ue8da", launch: "C:\\Users\\hisui\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe", name: "VS Code" }

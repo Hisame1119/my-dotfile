@@ -1,0 +1,136 @@
+/* ===================================================================
+   Power Menu Widget Styles - Light/Dark Mode Compatible
+   =================================================================== */
+
+/* --- ライトモード (デフォルト) --- */
+
+.power-menu-widget .label {
+    color: var(--red);
+    font-size: 13px;
+}
+
+.power-menu-popup {
+    background-color: var(--popup-bg-light);
+    padding: 32px;
+}
+
+.power-menu-popup .button {
+    padding: 0;
+    min-width: 140px;
+    max-width: 140px;
+    min-height: 80px;
+    border-radius: 12px;
+    background-color: var(--button-bg-light);
+    border: 8px solid transparent;
+}
+
+.power-menu-popup .button.hover {
+    background-color: var(--blue);
+    border: 8px solid var(--blue);
+}
+
+.power-menu-popup .button .label {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Segoe UI";
+    color: var(--text3-light);
+}
+
+.power-menu-popup .button .icon {
+    font-size: 32px;
+    color: var(--text4-light);
+}
+
+.power-menu-popup .button.hover .label,
+.power-menu-popup .button.hover .icon {
+    color: #ffffff;
+}
+
+.power-menu-popup .profile-info {
+    padding: 0 0 16px 0;
+    border-bottom: 1px solid var(--border-light);
+    background-color: transparent;
+    margin-bottom: 16px;
+}
+
+.power-menu-popup .profile-info .profile-username {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text1-light);
+    margin-top: 0;
+    font-family: "Segoe UI";
+}
+
+.power-menu-popup .profile-info .profile-account-type {
+    font-size: 13px;
+    color: var(--text3-light);
+    margin-top: 4px;
+    font-family: "Segoe UI";
+}
+
+.power-menu-overlay {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.power-menu-overlay .uptime {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: var(--text3-light);
+    font-weight: 600;
+}
+
+.uptime {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--text4-light);
+    font-weight: 600;
+}
+
+/* ===================================================================
+   DARK MODE OVERRIDES
+   =================================================================== */
+
+.dark .power-menu-popup {
+    background-color: var(--popup-bg-dark);
+}
+
+.dark .power-menu-popup .button {
+    background-color: var(--button-bg-dark);
+}
+
+.dark .power-menu-popup .button.hover {
+    background-color: var(--blue);
+    border-color: var(--blue);
+}
+
+.dark .power-menu-popup .button .label {
+    color: var(--text3-dark);
+}
+
+.dark .power-menu-popup .button .icon {
+    color: var(--text4-dark);
+}
+
+.dark .power-menu-popup .profile-info {
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.dark .power-menu-popup .profile-info .profile-username {
+    color: var(--text1-dark);
+}
+
+.dark .power-menu-popup .profile-info .profile-account-type {
+    color: var(--text3-dark);
+}
+
+.dark .power-menu-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dark .power-menu-overlay .uptime {
+    color: var(--text3-dark);
+}
+
+.dark .uptime {
+    color: var(--text4-dark);
+}

@@ -1,0 +1,54 @@
+/* ===================================================================
+   Komorebi Workspaces Widget Styles - Light/Dark Mode Compatible
+   =================================================================== */
+
+/* --- ライトモード (デフォルト) --- */
+
+.komorebi-active-layout {
+    padding: 0;
+}
+
+.komorebi-workspaces .offline-status {
+    color: var(--text4-light);
+    font-size: 12px;
+    padding: 0 0 0 4px;
+    font-weight: 600;
+}
+
+.komorebi-workspaces .ws-btn {
+    border: none;
+    background-color: var(--text4-light);
+    margin: 0 3px;
+    height: 9px;
+    width: 9px;
+    border-radius: 4px;
+}
+
+.komorebi-workspaces .ws-btn:hover {
+    color: var(--text2-light);
+}
+
+.komorebi-workspaces .ws-btn.populated {
+    background-color: var(--lavender);
+}
+
+.komorebi-workspaces .ws-btn.active {
+    background-color: var(--blue);
+    width: 36px;
+}
+
+/* ===================================================================
+   DARK MODE OVERRIDES
+   =================================================================== */
+
+.dark .komorebi-workspaces .offline-status {
+    color: var(--text4-dark);
+}
+
+.dark .komorebi-workspaces .ws-btn {
+    background-color: var(--text4-dark);
+}
+
+.dark .komorebi-workspaces .ws-btn:hover {
+    color: var(--text2-dark);
+}

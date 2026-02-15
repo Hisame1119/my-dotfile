@@ -1,3 +1,7 @@
 [user]
 	name = Hisame1119
 	email = hisame.takumi@gmail.com
+[core]
+	excludesfile = C:/Users/hisui/.gitignore_global
+[credential "helperselector"]
+	selected = manager

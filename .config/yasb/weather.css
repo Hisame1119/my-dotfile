@@ -1,8 +1,19 @@
+/* ===================================================================
+   Weather Widget Styles - Light/Dark Mode Compatible
+   =================================================================== */
+
+/* --- ライトモード (デフォルト) --- */
+
+/* Weather Widget */
 .weather-widget {}
 .weather-widget.your_class {} /* If you are using class_name option */
 .weather-widget .widget-container {}
-.weather-widget .label {}
-.weather-widget .label.alt {}
+.weather-widget .label {
+  color: var(--text1-light);
+}
+.weather-widget .label.alt {
+  color: var(--text2-light);
+}
 .weather-widget .icon {}
 
 /* Individual weather icons */
@@ -24,59 +35,128 @@
 
 /* Weather card style */
 .weather-card {
-    background-color: rgba(17, 17, 27, 0.5);
+    background-color: var(--popup-bg-light);
 }
+
 .weather-card-today {
-    border: 1px solid #282936;
+    border: 1px solid var(--border-light);
     border-radius: 8px;
-    background-color:  rgba(17, 17, 27, 0.2);
+    background-color: var(--bg-color2-light);
 }
+
 .weather-card-today .label {
     font-size: 12px;
+    color: var(--text1-light);
 }
+
 .weather-card-today .label.location {
     font-size: 24px;
     font-weight: 700;
+    color: var(--text1-light);
 }
+
 .weather-card-today .label.alert {
     font-size: 12px;
     font-weight: 700;
-    background-color: rgba(247, 199, 42, 0.05);
-    border: 1px solid rgba(247, 209, 42, 0.1);
-    color: rgba(196, 181, 162, 0.85);
+    background-color: rgba(247, 199, 42, 0.15);
+    border: 1px solid rgba(247, 209, 42, 0.3);
+    color: #c4a070;
     border-radius: 6px;
     padding: 5px 0;
 }
+
 .weather-card-day {
-    border: 1px solid #45475a;
+    border: 1px solid var(--border-light);
     border-radius: 8px;
-    background-color:  rgba(17, 17, 27, 0.2);
+    background-color: var(--bg-color2-light);
 }
 
 .weather-card-day.active {
-    background-color: rgba(40, 40, 60, 0.6);
-    border: 1px solid rgba(50, 50, 75, 1);
+    background-color: var(--active-bg-light);
+    border: 1px solid var(--border-light);
 }
 
 .weather-card-day:hover {
-    background-color: rgba(40, 40, 60, 0.6);
+    background-color: var(--hover-bg-light);
 }
 
 .weather-card-day .label {
     font-size: 12px;
+    color: var(--text1-light);
 }
 
 .weather-card .hourly-container {
-    border: 1px solid #282936;
-    background-color: #3c5fa0;
+    border: 1px solid var(--border-light);
+    background-color: var(--bg-color2-light);
     border-radius: 8px;
     min-height: 150px;
 }
 
 .weather-card .hourly-data {
-    /* font-family: 'Segoe UI';*/
-    /* color: cyan;*/ /* <- Font color */
-    background-color: #FAE93F; /* <- Curve color */
+    background-color: var(--yellow); /* Curve color */
     font-size: 12px;
     font-weight: bold;
+    color: var(--text1-light);
+}
+
+/* ===================================================================
+   DARK MODE OVERRIDES
+   =================================================================== */
+
+.dark .weather-widget .label {
+  color: var(--text1-dark);
+}
+
+.dark .weather-widget .label.alt {
+  color: var(--text2-dark);
+}
+
+.dark .weather-card {
+    background-color: var(--popup-bg-dark);
+}
+
+.dark .weather-card-today {
+    border: 1px solid var(--border-dark);
+    background-color: var(--bg-color2-dark);
+}
+
+.dark .weather-card-today .label {
+    color: var(--text1-dark);
+}
+
+.dark .weather-card-today .label.location {
+    color: var(--text1-dark);
+}
+
+.dark .weather-card-today .label.alert {
+    background-color: rgba(247, 199, 42, 0.1);
+    border: 1px solid rgba(247, 209, 42, 0.2);
+    color: rgba(196, 181, 162, 0.85);
+}
+
+.dark .weather-card-day {
+    border: 1px solid var(--border-dark);
+    background-color: var(--bg-color2-dark);
+}
+
+.dark .weather-card-day.active {
+    background-color: var(--active-bg-dark);
+    border: 1px solid var(--border-dark);
+}
+
+.dark .weather-card-day:hover {
+    background-color: var(--hover-bg-dark);
+}
+
+.dark .weather-card-day .label {
+    color: var(--text1-dark);
+}
+
+.dark .weather-card .hourly-container {
+    border: 1px solid var(--border-dark);
+    background-color: var(--bg-color2-dark);
+}
+
+.dark .weather-card .hourly-data {
+    color: var(--text1-dark);
 }

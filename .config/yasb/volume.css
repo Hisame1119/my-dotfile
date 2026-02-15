@@ -1,11 +1,17 @@
+/* ===================================================================
+   Volume Widget Styles - Light/Dark Mode Compatible
+   =================================================================== */
+
+/* --- ライトモード (デフォルト) --- */
+
+/* Volume Widget */
 .volume-widget .icon {
-  color: #74b0ff;
-  ;
+  color: var(--blue);
   margin: 0 2px 0 0;
 }
 
 .audio-menu {
-  background-color: rgba(17, 17, 27, 0.4);
+  background-color: var(--popup-bg-light);
   min-width: 300px;
 }
 
@@ -22,15 +28,15 @@
   margin: 2px 0;
   font-size: 12px;
   border-radius: 4px;
+  color: var(--text1-light);
 }
 
 .audio-menu .audio-container .device.selected {
-  background-color: rgba(255, 255, 255, 0.085);
-
+  background-color: var(--hover-bg-light);
 }
 
 .audio-menu .audio-container .device:hover {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: var(--hover-bg-light);
 }
 
 /* Toggle button for application volumes (if is enabled) */
@@ -42,15 +48,15 @@
   min-height: 24px;
   min-width: 24px;
   border-radius: 4px;
+  color: var(--text1-light);
 }
 
 .audio-menu .toggle-apps.expanded {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--active-bg-light);
 }
 
 .audio-menu .toggle-apps:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-
+  background-color: var(--hover-bg-light);
 }
 
 /* Container for application volumes (if is enabled) */
@@ -58,7 +64,7 @@
   padding: 8px;
   margin-top: 20px;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.062)
+  background-color: var(--bg-color2-light);
 }
 
 .audio-menu .apps-container .app-volume .app-icon-container {
@@ -76,5 +82,45 @@
 }
 
 .audio-menu .apps-container .app-volume .app-icon-container:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--hover-bg-light);
+}
+
+/* ===================================================================
+   DARK MODE OVERRIDES
+   =================================================================== */
+
+.dark .audio-menu {
+  background-color: var(--popup-bg-dark);
+}
+
+.dark .audio-menu .audio-container .device {
+  color: var(--text1-dark);
+}
+
+.dark .audio-menu .audio-container .device.selected {
+  background-color: var(--hover-bg-dark);
+}
+
+.dark .audio-menu .audio-container .device:hover {
+  background-color: var(--hover-bg-dark);
+}
+
+.dark .audio-menu .toggle-apps {
+  color: var(--text1-dark);
+}
+
+.dark .audio-menu .toggle-apps.expanded {
+  background-color: var(--active-bg-dark);
+}
+
+.dark .audio-menu .toggle-apps:hover {
+  background-color: var(--hover-bg-dark);
+}
+
+.dark .audio-menu .apps-container {
+  background-color: var(--bg-color2-dark);
+}
+
+.dark .audio-menu .apps-container .app-volume .app-icon-container:hover {
+  background-color: var(--hover-bg-dark);
 }

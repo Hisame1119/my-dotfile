@@ -1,44 +1,110 @@
 {
   "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.38/schema.json",
+
   "app_specific_configuration_path": "$Env:KOMOREBI_CONFIG_HOME/applications.json",
+
+  /* ===================================================================
+     ウィンドウ動作設定 (Window Behavior Settings)
+     =================================================================== */
+
+  // ウィンドウの非表示動作
+  // "Cloak" = ウィンドウを完全に隠す（パフォーマンス良好）
+  // "Hide" = ウィンドウを最小化
   "window_hiding_behaviour": "Cloak",
+
+  // モニター間のウィンドウ移動動作
+  // "Insert" = 新しいモニターの適切な位置に挿入
+  // "Swap" = ウィンドウの位置を交換
   "cross_monitor_move_behaviour": "Insert",
-  "default_workspace_padding": 3,
-  "default_container_padding": 3,
-  "border": true,
-  "border_width": 4,
-  "border_offset": -1,
-  "border_colours": {
-    "single": "#89b4fa",
-    "stack": "#00ff99",
-    "floating": "#00ff99",
-    "monocle": "#f38ba8",
-    "unfocused": "#303030"
-  },
+
+  // マウスカーソルがフォーカスに追従するか
   "mouse_follows_focus": true,
+
+  /* ===================================================================
+     レイアウト設定 (Layout Settings)
+     =================================================================== */
+
+  // ワークスペース全体のパディング（ピクセル）
+  "default_workspace_padding": 3,
+
+  // ウィンドウコンテナ間のパディング（ピクセル）
+  "default_container_padding": 3,
+
+  /* ===================================================================
+     ボーダー設定 (Border Settings) - YASBテーマと統一
+     =================================================================== */
+
+  // ウィンドウボーダーを有効化
+  "border": true,
+
+  // ボーダーの太さ（ピクセル）
+  "border_width": 4,
+
+  // ボーダーのオフセット（負の値でウィンドウの外側に配置）
+  "border_offset": -1,
+
+  // ボーダーの色設定（YASBの--blue: #448fffに統一）
+  "border_colours": {
+    "single": "#448fff",      // 通常のウィンドウ（YASBのテーマカラーに統一）
+    "stack": "#00ff99",       // スタック表示のウィンドウ
+    "floating": "#00ff99",    // フローティングウィンドウ
+    "monocle": "#f38ba8",     // モノクル（全画面）表示
+    "unfocused": "#303030"    // フォーカスされていないウィンドウ
+  },
+
+  /* ===================================================================
+     透明度設定 (Transparency Settings)
+     =================================================================== */
+
+  // 非アクティブウィンドウの透明度を有効化
   "transparency": true,
+
+  // 透明度の値（0-255、240 = 約94%不透明度）
   "transparency_alpha": 240,
+
+  /* ===================================================================
+     アニメーション設定 (Animation Settings)
+     =================================================================== */
+
   "animation": {
+    // アニメーションを有効化
     "enabled": true,
+
+    // アニメーション時間（ミリ秒）
     "duration": 400,
+
+    // フレームレート（FPS）
     "fps": 120,
+
+    // アニメーションスタイル
     "style": {
-      "movement": "EaseOutBack",
-      "transparency": "Linear"
+      "movement": "EaseOutBack",     // ウィンドウ移動のイージング
+      "transparency": "Linear"       // 透明度変化のイージング
     }
   },
+
+  /* ===================================================================
+     テーマ設定 (Theme Settings)
+     =================================================================== */
+
   "theme": {
     "palette": "Base16",
     "name": "Ashes",
     "unfocused_border": "Base03",
     "bar_accent": "Base0D"
   },
+
+  /* ===================================================================
+     モニター設定 (Monitor Settings)
+     =================================================================== */
+
   "monitors": [
+    // プライマリモニター
     {
       "workspaces": [
         {
           "name": "I",
-          "layout": "BSP"
+          "layout": "BSP"    // Binary Space Partitioning（二分割レイアウト）
         },
         {
           "name": "II",
@@ -50,6 +116,7 @@
         }
       ]
     },
+    // セカンダリモニター
     {
       "workspaces": [
         {
@@ -67,7 +134,14 @@
       ]
     }
   ],
+
+  /* ===================================================================
+     無視ルール (Ignore Rules)
+     タイリングウィンドウマネージャーで管理しないアプリケーション
+     =================================================================== */
+
   "ignore_rules": [
+    // ===== メッセージング & コミュニケーション =====
     {
       "kind": "Title",
       "id": "LINE",
@@ -75,37 +149,19 @@
     },
     {
       "kind": "Title",
+      "id": "Phone Link",
+      "matching_strategy": "Equals"
+    },
+
+    // ===== ゲーム & ゲームランチャー =====
+    {
+      "kind": "Title",
       "id": "Steam",
       "matching_strategy": "Equals"
     },
     {
-      "kind": "Title",
-      "id": "Auto Dark Mode",
-      "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Title",
-      "id": "WinDynamicDesktop",
-      "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Title",
-      "id": "Configure Schedule",
-      "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Title",
-      "id": "Intelligent standby list cleaner",
-      "matching_strategy": "Equals"
-    },
-    {
       "kind": "Exe",
-      "id": "Spotify.exe",
-      "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Exe",
-      "id": "crosvm.exe",
+      "id": "crosvm.exe",              // Androidエミュレータ関連
       "matching_strategy": "Contains"
     },
     {
@@ -115,17 +171,7 @@
     },
     {
       "kind": "Title",
-      "id": "TVerRec",
-      "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Title",
-      "id": "Setting",
-      "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Title",
-      "id": "Riot Client",
+      "id": "Riot Client",             // Valorantランチャー
       "matching_strategy": "Equals"
     },
     {
@@ -135,23 +181,172 @@
     },
     {
       "kind": "Title",
-      "id": "HoYoPlay",
+      "id": "HoYoPlay",                // 原神などのランチャー
       "matching_strategy": "Equals"
     },
+
+    // ===== メディア & エンターテイメント =====
     {
       "kind": "Exe",
-      "id": "GoogleDriveFS.exe",
+      "id": "Spotify.exe",
       "matching_strategy": "Equals"
     },
     {
       "kind": "Title",
-      "id": "Phone Link",
+      "id": "TVerRec",                 // TVer録画ツール
+      "matching_strategy": "Equals"
+    },
+
+    // ===== システムツール & ユーティリティ =====
+    {
+      "kind": "Title",
+      "id": "Auto Dark Mode",          // ダークモード自動切り替え
       "matching_strategy": "Equals"
     },
     {
       "kind": "Title",
-      "id": "Autodesk Access",
+      "id": "WinDynamicDesktop",       // 壁紙自動変更ツール
       "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Configure Schedule",      // スケジュール設定ダイアログ
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Intelligent standby list cleaner",  // メモリクリーナー
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Setting",                 // 汎用設定ダイアログ
+      "matching_strategy": "Equals"
+    },
+
+    // ===== クラウドストレージ =====
+    {
+      "kind": "Exe",
+      "id": "GoogleDriveFS.exe",       // Google Drive
+      "matching_strategy": "Equals"
+    },
+
+    // ===== デザイン & 開発ツール =====
+    {
+      "kind": "Title",
+      "id": "Autodesk Access",         // Autodesk製品ランチャー
+      "matching_strategy": "Equals"
+    }
+  ],
+
+  /* ===================================================================
+     フローティングルール (Floating Rules)
+     タイリング管理はするが、フローティング表示するアプリケーション
+     通常のウィンドウとして表示され、ワークスペースに固定されます
+     =================================================================== */
+
+  "floating_applications": [
+    // ===== インストーラー & セットアップウィザード =====
+    {
+      "kind": "Title",
+      "id": "Setup",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Installer",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Install",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "セットアップ",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "インストール",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Wizard",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "ウィザード",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Class",
+      "id": "#32770",                  // Windows標準ダイアログボックス
+      "matching_strategy": "Equals"
+    },
+
+    // ===== ダイアログボックス & 設定ウィンドウ =====
+    {
+      "kind": "Title",
+      "id": "Properties",              // プロパティダイアログ
+      "matching_strategy": "EndsWith"
+    },
+    {
+      "kind": "Title",
+      "id": "プロパティ",
+      "matching_strategy": "EndsWith"
+    },
+    {
+      "kind": "Title",
+      "id": "Preferences",             // 設定ダイアログ
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Options",                 // オプションダイアログ
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Settings",                // 設定ダイアログ
+      "matching_strategy": "Contains"
+    },
+
+    // ===== ファイル操作ダイアログ =====
+    {
+      "kind": "Title",
+      "id": "Open",                    // ファイルを開くダイアログ
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Save As",                 // 名前を付けて保存ダイアログ
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Browse",                  // フォルダー参照ダイアログ
+      "matching_strategy": "Contains"
+    },
+
+    // ===== 確認ダイアログ =====
+    {
+      "kind": "Title",
+      "id": "Confirm",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Warning",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Error",
+      "matching_strategy": "Contains"
     }
   ]
 }
